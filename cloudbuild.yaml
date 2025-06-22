@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  args:
+    [
+      'functions', 'deploy', 'weather_alert',
+      '--runtime=python310',
+      '--trigger-topic=weather-alert-topic',
+      '--entry-point=weather_alert',
+      '--region=us-central1',
+      '--memory=128MB',
+      '--timeout=60s'
+    ]
