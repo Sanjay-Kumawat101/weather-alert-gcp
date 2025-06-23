@@ -1,0 +1,31 @@
+name: Deploy to Google Cloud Functions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: daily-weather-alert-app
+        service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+
+    - name: Deploy Cloud Function
+      run: |
+        gcloud functions deploy weather_alert \
+          --runtime=python310 \
+          --trigger-topic=weather-alert-topic \
+          --entry-point=weather_alert \
+          --region=us-central1 \
+          --memory=128MB \
+          --timeout=60s
