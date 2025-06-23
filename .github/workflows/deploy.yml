@@ -20,6 +20,11 @@ jobs:
         project_id: daily-weather-alert-app
         service_account_key: ${{ secrets.GCP_CREDENTIALS }}
 
+    - name: Authenticate service account
+      run: |
+        echo "${{ secrets.GCP_CREDENTIALS }}" > key.json
+        gcloud auth activate-service-account --key-file=key.json
+
     - name: Deploy Cloud Function
       run: |
         gcloud functions deploy weather_alert \
