@@ -5,7 +5,7 @@ from google.cloud import secretmanager
 
 def get_secret(secret_id):
     client = secretmanager.SecretManagerServiceClient()
-    project_id = "daily-weather-alert-app"  # Replace with your GCP project ID
+    project_id = "daily-weather-alert-app"  
     name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
     response = client.access_secret_version(request={"name": name})
     return response.payload.data.decode("UTF-8")
@@ -23,8 +23,8 @@ def weather_alert(event, context):
 
     message = f"Weather in {city}: {weather}\nTemperature: {temp}°C"
 
-    sender = "cloudatvita2025@gmail.com"
-    receiver = "kumawatsanjay927@gmail.com"
+    sender = "@gmail.com"
+    receiver = "@gmail.com"
 
     msg = MIMEText(message)
     msg["Subject"] = f"Daily Weather Alert for {city}"
