@@ -22,4 +22,4 @@ The backend of the Weather Alert App is a serverless, event-driven system built 
 | Secret Manager  | API key security                          |
 | Cloud Logging   | Monitoring & debugging                    |
 
-# Current Not Working
+# Currently Not Working
